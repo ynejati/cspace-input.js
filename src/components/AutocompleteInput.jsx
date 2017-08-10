@@ -135,6 +135,7 @@ export default class AutocompleteInput extends Component {
     this.findMatchingTerms = this.findMatchingTerms.bind(this);
     this.handleDropdownInputCommit = this.handleDropdownInputCommit.bind(this);
     this.handleDropdownInputRef = this.handleDropdownInputRef.bind(this);
+    this.handleNotifyBeforeFocusWrap = this.handleNotifyBeforeFocusWrap.bind(this);
 
     this.state = {
       partialTerm: null,
@@ -229,6 +230,16 @@ export default class AutocompleteInput extends Component {
     this.dropdownInput = ref;
   }
 
+  handleNotifyBeforeFocusWrap(){
+    console.log('handle notify before focus wrap')
+    transferFocus()
+  }
+
+  transferFocus() {
+    // transfer focus between menus
+    console.log('transfer focus between menus')
+  }
+
   renderQuickAdd() {
     const {
       addTerm,
@@ -245,6 +256,7 @@ export default class AutocompleteInput extends Component {
     } = this.state;
 
     if (showQuickAdd && partialTerm && partialTerm.length >= minLength) {
+      
       return (
         <QuickAdd
           add={addTerm}
@@ -253,6 +265,8 @@ export default class AutocompleteInput extends Component {
           formatDestinationName={formatSourceName}
           recordTypes={recordTypes}
           to={source}
+          notifyBeforeFocusWrap={this.handleNotifyBeforeFocusWrap}
+          transferFocus={true}
         />
       );
     }
@@ -325,6 +339,8 @@ export default class AutocompleteInput extends Component {
         menuFooter={this.renderQuickAdd()}
         options={options}
         ref={this.handleDropdownInputRef}
+        transferFocus={showQuickAdd}
+        notifyBeforeFocusWrap={this.handleNotifyBeforeFocusWrap}
         value={value}
         valueLabel={getDisplayName(value)}
         onCommit={this.handleDropdownInputCommit}

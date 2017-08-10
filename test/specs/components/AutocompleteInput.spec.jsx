@@ -335,4 +335,6 @@ describe('AutocompleteInput', function suite() {
     input.className.should.contain('cspace-input-ReadOnlyInput--common');
     input.textContent.should.equal('David Bowie');
   });
+
+  // it should transfer focus before wrap when quickAdd component is present in footer
 });

@@ -204,6 +204,9 @@ export default class DropdownMenuInput extends Component {
       onMount,
       onOpen,
       onUpdate,
+      transferFocus,
+      notifyBeforeFocusWrap,
+
       /* eslint-enable no-unused-vars */
       ...remainingProps
     } = this.props;
@@ -241,6 +244,8 @@ export default class DropdownMenuInput extends Component {
           renderItemLabel={renderItemLabel}
           value={value}
           onSelect={this.handleMenuSelect}
+          transferFocus={transferFocus}
+          notifyBeforeFocusWrap={notifyBeforeFocusWrap}
         />
         {renderMenuFooter(menuFooter)}
       </DropdownInput>

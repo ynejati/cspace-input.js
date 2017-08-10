@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Menu from './Menu';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
 import parseResourceID from '../helpers/parseResourceID';
@@ -11,6 +12,8 @@ const propTypes = {
   formatAddPrompt: PropTypes.func,
   recordTypes: PropTypes.object,
   to: PropTypes.string,
+  transferFocus: PropTypes.bool,
+  notifyBeforeFocusWrap: PropTypes.func,
 };
 
 const defaultProps = {
@@ -57,6 +60,8 @@ export default class QuickAdd extends Component {
       formatDestinationName,
       recordTypes,
       to: destinationID,
+      transferFocus,
+      notifyBeforeFocusWrap,
     } = this.props;
 
     const destinations = parseResourceID(destinationID);
@@ -97,9 +102,12 @@ export default class QuickAdd extends Component {
     return (
       <div className={styles.common}>
         <div>{formatAddPrompt(displayName)}</div>
-        <ul>
-          {buttons}
-        </ul>
+        { /* TODO: alter Menu to suit QuickAdd */ }
+        <Menu
+          options={buttons}
+          transferFocus={transferFocus}
+          notifyBeforeFocusWrap={notifyBeforeFocusWrap}
+          />
       </div>
     );
   }
